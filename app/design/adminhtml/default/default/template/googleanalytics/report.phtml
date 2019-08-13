@@ -1,0 +1,65 @@
+<div class="content-header">
+	<table cellspacing="0">
+        <tbody><tr>
+            <td><h3 class="icon-head head-cms-page"><?php echo $this->__('Google Analytics Report') ?></h3></td>
+           
+        </tr>
+    </tbody></table>	
+	</div>
+<table width="100%" border="0" cellspacing="5">
+<tr>
+<td width="50%">
+<div class="entry-edit">
+<div class="entry-edit-head"><h4>Page Visits</h4></div>
+<fieldset>
+<div id="chart"></div>
+</fieldset>
+</div>
+</td>
+<td width="50%">
+<div class="entry-edit">
+<div class="entry-edit-head"><h4>Top Referrals</h4></div>
+<fieldset>
+<div id="ga_dash_rdata"></div>
+</fieldset>
+</div>
+</td>
+</tr>
+
+
+<tr>
+<td width="50%">
+<div class="entry-edit">
+<div class="entry-edit-head"><h4>Views Track</h4></div>
+<fieldset>
+<div id="ga_dash_historydata"></div>
+</td>
+<td width="50%">
+<div class="entry-edit">
+<div class="entry-edit-head"><h4>Top Pages</h4></div>
+<fieldset>
+<div id="ga_dash_pgddata"></div>
+</fieldset>
+</div>
+</td>
+</tr>
+
+<!--<tr>
+<td colspan="2">
+<div id="ga_dash_mapdata"></div>
+</td>
+</tr>-->
+
+</table>
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+<?php 
+echo $this->topReffer;
+echo $this->PageViews;
+echo $this->PageVisitHistory;
+echo $this->TopPages;
+echo $this->CountryVisits;
+?>
+</script>

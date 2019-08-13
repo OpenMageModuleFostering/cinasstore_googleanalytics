@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+ <googleanalytics_adminhtml_dashboard_index>
+    <reference name="content">
+      <block type="googleanalytics/adminhtml_dashboard" name="googleanalytic" template="googleanalytics/report.phtml"/>
+    </reference>
+  </googleanalytics_adminhtml_dashboard_index>
+  
+    <googleanalytics_adminhtml_googleanalytics_index>
+        <reference name="content">
+            <block type="googleanalytics/adminhtml_googleanalytics" name="googleanalytics" />
+        </reference>
+    </googleanalytics_adminhtml_googleanalytics_index>
+</layout>

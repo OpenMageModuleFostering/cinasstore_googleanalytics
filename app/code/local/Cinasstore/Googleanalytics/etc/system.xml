@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <cinasstore translate="label">
+            <label>Cinasstore Extension</label>
+            <sort_order>400</sort_order>
+        </cinasstore>
+    </tabs>
+
+	<sections>
+        <googleanalytics translate="label" module="googleanalytics">
+            <class>separator-top</class>
+            <label>Google Analytics</label>
+            <tab>cinasstore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				<general translate="label">
+                    <label>Google Analytics Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+						<analytic_profile_id translate="label">
+                            <label>Google Analytic Profile ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>							
+                        </analytic_profile_id>										
+						<analytic_email_id translate="label">
+                            <label>Analytic Account Email ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </analytic_email_id>
+						<analytic_password translate="label">
+                            <label>Analytic Account Password</label>
+                            <frontend_type>password</frontend_type>                     
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </analytic_password>		
+						
+					</fields>
+				</general>
+				
+            </groups>
+        </googleanalytics>  
+    </sections>
+</config>

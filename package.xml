@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+    <name>cinasstore_googleanalytics</name>
+    <version>0.1.0</version>
+    <stability>stable</stability>
+    <license>GPL</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Show Google Analytics Dashboard in Magento Store</summary>
+    <description>Show Google Analytics Dashboard in Magento Store.</description>
+    <notes>No License Key. &#xD;
+Only one time Charge (No Charge after Purchase)&#xD;
+Fully Customizable and Non-Encrypted Code. Free Support Supporting Magento Versions 1.7 + &#xD;
+&#xD;
+Note- Before Installing the extension, please take the backup of the website</notes>
+    <authors><author><name>Cinas Technologies</name><user>Cinas</user><email>sales@cinastechnologies.com</email></author></authors>
+    <date>2013-12-30</date>
+    <time>19:34:40</time>
+    <contents><target name="mageetc"><dir name="modules"><file name="Cinasstore_GoogleAnalytics.xml" hash="36f2a205669e60a81a745ea279707c45"/></dir></target><target name="magelocal"><dir name="Cinasstore"><dir name="Googleanalytics"><dir name="Block"><dir name="Adminhtml"><file name="Dashboard.php" hash="c5d2bd03e58c93f8c75b1d13e0fe9242"/><dir name="Googleanalytics"><dir name="Edit"><file name="Form.php" hash="4fc3ee2c057426570d0ba5cd202d117e"/><dir name="Tab"><file name="Form.php" hash="1edd301e42af180be589cb0952abca29"/></dir><file name="Tabs.php" hash="4a02b3eae128c653ea3c90b4908525f9"/></dir><file name="Edit.php" hash="20596c13dbc4c849604656a08d65b56c"/><file name="Grid.php" hash="256c71e00a2c7f4c4f15452e78b4f441"/></dir><file name="Googleanalytics.php" hash="a450b2c377b9d3b0c012d4ac3a68c8c0"/></dir><file name="Googleanalytics.php" hash="0c550f4f87833acc048fe6e62bf1e6da"/></dir><dir name="Helper"><file name="Dashboard.php" hash="945a525471a730f6be94a9a2c73315c3"/><file name="Data.php" hash="981a95aa6d0c3bc98d84f4249e6f9821"/></dir><dir name="Model"><file name="Gapi.php" hash="4503d4eaba7704ca425292fb0b650b1e"/><file name="Googleanalytics.php" hash="fbafb51feba61a4f75d425b9c82a27ff"/><dir name="Mysql4"><dir name="Googleanalytics"><file name="Collection.php" hash="7f4fa8e1631036fea33d195b7b5ec57d"/></dir><file name="Googleanalytics.php" hash="60c1a38819063aea14cf31db066e4c4b"/></dir><file name="Observer.php" hash="528d6351049b2aa4a73f898bf638c28b"/><file name="Status.php" hash="7c39b641f5a091ad67a30c784db7d3e2"/><dir name="System"><dir name="Config"><file name="Language.php" hash="a57563bf23ef1d12591f9001e15fc723"/></dir></dir></dir><dir name="controllers"><dir name="Adminhtml"><file name="DashboardController.php" hash="df6a79802706a4f4e6aea18809e41585"/><file name="GoogleanalyticsController.php" hash="5641fa0e0cd5475b1aebf448bf0f60e8"/></dir><file name="IndexController.php" hash="f7535853602c2e1f5e319b08f7434993"/></dir><dir name="etc"><file name="adminhtml.xml" hash="a187720a4e0940cf4f5127f45058459c"/><file name="config.xml" hash="11e3322f8a1019ad070f5303761ff75d"/><file name="system.xml" hash="cc4af2cf3634cb44503df7a0ce184d86"/></dir><dir name="sql"><dir name="Googleanalytics_setup"><file name="mysql4-install-0.1.0.php" hash="3cdbd040bd4a2b88e52654a42692fa6f"/><file name="mysql4-upgrade-0.1.0-0.1.1.php" hash="8c8ea981a81cf84c52b864438a10db1a"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><file name="googleanalytics.xml" hash="25fd348f746f3bf6eb640c9740f86463"/></dir><dir name="template"><dir name="googleanalytics"><file name="report.phtml" hash="6027e1d82bc578d6002797e42428e442"/></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

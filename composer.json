@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/cinasstore_googleanalytics",
+    "type": "magento-module",
+    "license": "GPL",
+    "homepage": "",
+    "description": "Show Google Analytics Dashboard in Magento Store",
+    "authors": [
+    {
+        "name": "Cinas Technologies",
+        "email": "sales@cinastechnologies.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
