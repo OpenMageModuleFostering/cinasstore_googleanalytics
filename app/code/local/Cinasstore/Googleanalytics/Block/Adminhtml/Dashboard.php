@@ -48,15 +48,16 @@ class Cinasstore_Googleanalytics_Block_Adminhtml_Dashboard extends Mage_Adminhtm
 	$this->CountryVisits =  $this->showCountryVisits($processor, $this->ga_profile_id);
 	$this->TopPages =  $this->showTopPages($processor, $this->ga_profile_id);	
 	$this->PageVisitHistory =  $this->getPageVisitHistory($processor, $this->ga_profile_id); 
-	
-    $html = parent::_toHtml();
+	$this->PageKeywordSearch =  $this->getKeywordSearch($processor, $this->ga_profile_id);  
+	$this->PageBrowserViews =  $this->getBrowserViews($processor, $this->ga_profile_id);  
+    $html = parent::_toHtml(); 
     return $html;
   }
   
 	public function showTopReferrer($ga, $ga_profile_id)
 	{
 	
-	  $ga->requestReportData($ga_profile_id, array('source','medium'),array('visits'),'-visits', '', '', '', 1,5);  
+	  $ga->requestReportData($ga_profile_id, array('source','medium'),array('visits'),'-visits', '', '2013-12-25', '2014-01-03', 1,5);  
 	  $results = $ga->getResults();
 	  
 	  foreach($results as $result)
@@ -108,7 +109,7 @@ class Cinasstore_Googleanalytics_Block_Adminhtml_Dashboard extends Mage_Adminhtm
 				
 				var options = {
 					page: 'enable',
-					pageSize: 5,
+					pageSize: 15,
 					width: '100%'
 				};        
 				
@@ -119,9 +120,75 @@ class Cinasstore_Googleanalytics_Block_Adminhtml_Dashboard extends Mage_Adminhtm
 	  return $code;
 	} 
 	
+	public function getBrowserViews($ga, $ga_profile_id)
+   {
+	  $ga->requestReportData($ga_profile_id, array('browser'), array('pageviews','visits'), array('-visits'));
+      $results = $ga->getResults();
+	  foreach($results as $result)
+	   { 
+	      $ga_dash_browserviews .= "['".$result->getBrowser()."','".$result->getPageviews()."','".$result->getVisits()."'],";
+	   }
+	   
+	    $code.='
+				google.load("visualization", "1", {packages:["table"]})
+				google.setOnLoadCallback(ga_dash_drawBrowserView);
+				function ga_dash_drawBrowserView() {
+				var data = google.visualization.arrayToDataTable(['."
+				  ['Browser', 'Page Views', 'Visits'],"
+				  .$ga_dash_browserviews.
+				"  
+				]);
+				
+				var options = {
+					page: 'enable',
+					pageSize: 10,
+					width: '100%'
+				};        
+				
+				var chart = new google.visualization.Table(document.getElementById('ga_dash_browserdata'));
+				chart.draw(data, options);
+				
+			  }";
+			  
+		 return $code;
+   }	
+	
+   public function getKeywordSearch($ga, $ga_profile_id)
+   {
+	  $ga->requestReportData($ga_profile_id, array('keyword'), array('visits'));
+      $results = $ga->getResults();
+	  foreach($results as $result)
+	   { 
+	      $ga_dash_top_Keywords .= "['".$result->getKeyword()."','".$result->getVisits()."'],";
+	   }
+	   
+	    $code.='
+				google.load("visualization", "1", {packages:["table"]})
+				google.setOnLoadCallback(ga_dash_drawKeywordHistory);
+				function ga_dash_drawKeywordHistory() {
+				var data = google.visualization.arrayToDataTable(['."
+				  ['Keyword', 'Visits'],"
+				  .$ga_dash_top_Keywords.
+				"  
+				]);
+				
+				var options = {
+					page: 'enable',
+					pageSize: 10,
+					width: '100%'
+				};        
+				
+				var chart = new google.visualization.Table(document.getElementById('ga_dash_keyworddata'));
+				chart.draw(data, options);
+				
+			  }";
+			  
+		 return $code;
+   }	
+	
    public function getPageVisitHistory($ga, $ga_profile_id)
 	{
-		$ga->requestReportData($ga_profile_id, 'pagePath', array('pageviews', 'uniquePageviews', 'exitRate', 'avgTimeOnPage', 'entranceBounceRate'), null, 'pagePath == \'/\'');
+		$ga->requestReportData($ga_profile_id, 'pagePath', array('pageviews', 'uniquePageviews', 'exitRate', 'avgTimeOnPage', 'entranceBounceRate', 'organicSearches','itemRevenue','transactionRevenuePerVisit','avgPageLoadTime'), null, 'pagePath == \'/\'', date('Y-m-d'));
         $results = $ga->getResults();
 		
 	  foreach($results as $result)
@@ -131,6 +198,19 @@ class Cinasstore_Googleanalytics_Block_Adminhtml_Dashboard extends Mage_Adminhtm
 		 $ga_dash_top_pages .="['Avg time on page','".$this->secondMinute($result->getAvgtimeonpage())."'],";
 		 $ga_dash_top_pages .="['Bounce rate','".round($result->getEntrancebouncerate(), 2)."'],";
 		 $ga_dash_top_pages .="['Exit rate','".round($result->getExitrate(), 2)."%'],";
+		 $ga_dash_top_pages .="['Organic Searches','".round($result->getOrganicsearches(), 2)."'],";
+		 $ga_dash_top_pages .="['Revenue','".round($result->getItemrevenue(), 2)."'],";
+		 $ga_dash_top_pages .="['Revenue/Visit','".round($result->getTransactionrevenuepervisit(), 2)."'],";
+		 
+		 $returnCode['Page Views'] = number_format($result->getPageviews());
+		 $returnCode['Unique Views'] = number_format($result->getUniquepageviews());
+		 $returnCode['Avg time on page'] = $this->secondMinute($result->getAvgtimeonpage());
+		 $returnCode['Bounce rate'] = number_format($result->getEntrancebouncerate());
+		 $returnCode['Exit rate'] = round($result->getExitrate(), 2)."%";
+		 $returnCode['Organic Searches'] = number_format($result->getPageviews());
+		 $returnCode['Revenue'] = number_format($result->getItemrevenue());
+		 $returnCode['Revenue/Visit'] = round($result->getTransactionrevenuepervisit(), 2);
+		 return $returnCode;
 	   }
 	  
 		 
@@ -146,7 +226,7 @@ class Cinasstore_Googleanalytics_Block_Adminhtml_Dashboard extends Mage_Adminhtm
 				
 				var options = {
 					page: 'enable',
-					pageSize: 5,
+					pageSize: 10,
 					width: '100%'
 				};        
 				
@@ -171,7 +251,7 @@ class Cinasstore_Googleanalytics_Block_Adminhtml_Dashboard extends Mage_Adminhtm
 
 	public function showCountryVisits($ga, $ga_profile_id)
 	{
-	  $ga->requestReportData($ga_profile_id, array('country'),array('visits'), 'visits');  
+	  $ga->requestReportData($ga_profile_id, array('country'),array('visits'), array('-visits'));  
 	  $results = $ga->getResults();
 	  
 	   
@@ -179,22 +259,22 @@ class Cinasstore_Googleanalytics_Block_Adminhtml_Dashboard extends Mage_Adminhtm
 				google.load("visualization", "1", {packages:["geochart"]});
 				google.setOnLoadCallback(ga_dash_drawmap);
 				function ga_dash_drawmap() {
-				var dataChart = google.visualization.arrayToDataTable(['."
+				var data  = google.visualization.arrayToDataTable(['."
 				  ['Country', 'Visits'],";
 					$countryVar = '';		  
 					  foreach($results as $result) {
-						  $countryVar.='["'.$result->getCountry().'", '.$result->getVisits().'],';
+						  $countryVar.="['".$result->getCountry()."', ".$result->getVisits()."],";
 					  }
 				
 					 $code .= $countryVar."
 				]);
 				
-				var optionsChart = {
-					colors: ['white', 'orange'], title:''
-				};
+				var options = {
+				colors: ['white', 'orange'], title:'Geo Location Visits'
+			    };
 				
 				var chart = new google.visualization.GeoChart(document.getElementById('ga_dash_mapdata'));
-				chart.draw(dataChart, optionsChart);
+				chart.draw(data , options);
 				
 			  }";
 			  
@@ -205,7 +285,7 @@ class Cinasstore_Googleanalytics_Block_Adminhtml_Dashboard extends Mage_Adminhtm
 	public function showPageViews($ga, $ga_profile_id)
 	{
 	
-	$ga->requestReportData($ga_profile_id, array('date'),array('pageviews'), 'date');  
+	$ga->requestReportData($ga_profile_id, array('date'),array('pageviews'), 'date', '');  
 	$results = $ga->getResults();
 	$code='
 	  google.load("visualization", "1", {packages:["corechart"]});

@@ -8,19 +8,39 @@
 	</div>
 <table width="100%" border="0" cellspacing="5">
 <tr>
-<td width="50%">
+<td colspan="2">
+<div class="entry-edit">
+<div class="entry-edit-head"><h4>Today</h4></div>
+<fieldset>
+<div id="ga_dash_historydata" class="grid">
+<table width="100%" border="0" rules="all" cellpadding="5">
+<tr>
+<?php
+$colCount=0;
+foreach($this->PageVisitHistory as $key=>$val)
+{
+ $colCount = $colCount +1; 
+?>
+<td align="center">
+<span style="font-size:18px; font-weight:bold;"><?php echo $val;?></span><br>
+<?php echo $key;?>
+</td>
+<?php
+ if($colCount%4==0)
+  echo '</tr><tr>';
+}
+?>
+</table>
+</div>
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
 <div class="entry-edit">
 <div class="entry-edit-head"><h4>Page Visits</h4></div>
 <fieldset>
 <div id="chart"></div>
-</fieldset>
-</div>
-</td>
-<td width="50%">
-<div class="entry-edit">
-<div class="entry-edit-head"><h4>Top Referrals</h4></div>
-<fieldset>
-<div id="ga_dash_rdata"></div>
 </fieldset>
 </div>
 </td>
@@ -30,10 +50,13 @@
 <tr>
 <td width="50%">
 <div class="entry-edit">
-<div class="entry-edit-head"><h4>Views Track</h4></div>
+<div class="entry-edit-head"><h4>Top Referrals</h4></div>
 <fieldset>
-<div id="ga_dash_historydata"></div>
+<div id="ga_dash_rdata" style="height:425px;"></div>
+</fieldset>
+</div>
 </td>
+
 <td width="50%">
 <div class="entry-edit">
 <div class="entry-edit-head"><h4>Top Pages</h4></div>
@@ -44,11 +67,32 @@
 </td>
 </tr>
 
-<!--<tr>
+<tr>
+<td>
+<div class="entry-edit">
+<div class="entry-edit-head"><h4>Keyword Search <?php echo date('Y-m-d',strtotime('1 month ago'));?> - <?php echo date('Y-m-d');?></h4></div>
+<fieldset>
+<div id="ga_dash_keyworddata"></div>
+</fieldset>
+</div>
+
+</td>
+<td>
+<div class="entry-edit">
+<div class="entry-edit-head"><h4>Browser Views <?php echo date('Y-m-d',strtotime('1 month ago'));?> - <?php echo date('Y-m-d');?></h4></div>
+<fieldset>
+<div id="ga_dash_browserdata"></div>
+</fieldset>
+</div>
+
+</td>
+</tr>
+
+<tr>
 <td colspan="2">
 <div id="ga_dash_mapdata"></div>
 </td>
-</tr>-->
+</tr>
 
 </table>
 
@@ -58,8 +102,9 @@
 <?php 
 echo $this->topReffer;
 echo $this->PageViews;
-echo $this->PageVisitHistory;
 echo $this->TopPages;
-echo $this->CountryVisits;
+//echo $this->CountryVisits;
+echo $this->PageKeywordSearch;
+echo $this->PageBrowserViews;
 ?>
 </script>
