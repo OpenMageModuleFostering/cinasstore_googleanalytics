@@ -1,5 +1,5 @@
 {
-    "name": "OpenMageModuleFostering\/cinasstore_googleanalytics",
+    "name": "openmage-module-fostering\/cinasstore_googleanalytics",
     "type": "magento-module",
     "license": "GPL",
     "homepage": "",
